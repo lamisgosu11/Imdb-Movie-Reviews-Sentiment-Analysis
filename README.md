@@ -1,4 +1,4 @@
-# Imdb-Movie-Reviews-Sentiment-Analysis
+# Imdb-Movie-Reviews-Sentiment-Analysis with web UI for demo
 
 This is my school project for my Machine Learning class at the University of Information Technology (DS103.N21).
 
@@ -11,7 +11,7 @@ In this assignment, I will try a variety of approaches. I will then compare thos
 The things you need before installing the repository.
 
 * Python
-* Imported libraries
+* Imported libraries (gradio for UI)
 * The dataset (https://shorturl.at/aiqxS)
 
 ### Installation
@@ -19,7 +19,7 @@ The things you need before installing the repository.
 A step by step guide that will tell you how to get the development environment up and running.
 
 ```
-$ You can get the dataset here: https://shorturl.at/aiqxS
+$ You can get the dataset here: https://shorturl.at/aiqxS 
 $ Set up Python and the Jupiter notebook.
 $ Install the libraries that I imported.
 ```
@@ -37,8 +37,11 @@ $ We will extend these features later for future implementation (input new comme
 
 ## Deployment
 
-Further information on how to deploy this on a live or release system. Describes the most significant branches, the pipelines they activate, and how to update the database (if anything special).
-
+Further information on how to deploy this on a live or release system is available (web ui). Discusses the most important branches, the pipelines they activate, and how to keep the database up to date (if anything special).
+There is an issue with phrases when the word weight is too high, causing incorrect classification for sentences that are too short.
+```
+$ Example: I don't love this movie would be classified as positive since "Love" has a lot larger weight than "Don't," so "Don't" will not make it negative.
+```
 ## Additional Documentation and Acknowledgments
 
 * Project folder on server:
