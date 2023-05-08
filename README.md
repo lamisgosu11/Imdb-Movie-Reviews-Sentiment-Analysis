@@ -4,8 +4,8 @@ This is my school project for my Machine Learning class at the University of Inf
 
 ## Getting Started
 
-Sentiment analysis of imdb comments with kaggle dataset (https://shorturl.at/aiqxS) is the topic of this research.__
-In this assignment, I will try a variety of approaches. I will then compare those techniques and select the best one to use.
+Sentiment analysis of imdb comments with kaggle dataset (https://shorturl.at/aiqxS) is the topic of this research. <br />
+In this assignment, I will try a variety of approaches. I will then compare those techniques and select the best one to use. 
 ### Prerequisites
 
 The things you need before installing the repository.
@@ -37,7 +37,7 @@ $ We will extend these features later for future implementation (input new comme
 
 ## Deployment
 
-Further information on how to deploy this on a live or release system is available (web ui). Discusses the most important branches, the pipelines they activate, and how to keep the database up to date (if anything special).__
+Further information on how to deploy this on a live or release system is available (web ui). Discusses the most important branches, the pipelines they activate, and how to keep the database up to date (if anything special). <br />
 There is an issue with phrases when the word weight is too high, causing incorrect classification for sentences that are too short.
 ```
 $ Example: I don't love this movie would be classified as positive since "Love" has a lot larger weight than "Don't," so "Don't" will not make it negative.
