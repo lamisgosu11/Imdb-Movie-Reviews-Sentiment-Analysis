@@ -151,21 +151,55 @@ def lr_bt(text):
 
 # tabbed interface for multiple models
 with gr.Blocks() as demo:
-    gr.Markdown("Comment and uncomment the lines below to try different models")
-    with gr.Tab("SVM"):
-        text = gr.Textbox(lines=5, placeholder="Review here...")
-        btn = gr.Button("Predict")
+    gr.Markdown("Sentiment Analysis Demo")
+    with gr.Tab("SVC"):
+        text = gr.Textbox(lines=5, placeholder="Type your review here...")
+        btn = gr.Button("Classify")
         label = gr.Label()
         btn.click(svc_bt, text, label)
+        gr.Markdown("## Image Examples")
+        gr.Examples(
+            examples=[
+                "I love this movie",
+                "I hate this movie",
+            ],
+            inputs=text,
+            outputs=label,
+            fn=svc_bt,
+            cache_examples=True,
+        )
     with gr.Tab("MultinomialNB"):
-        text = gr.Textbox(lines=5, placeholder="Review here...")
-        btn = gr.Button("Predict")
+        text = gr.Textbox(lines=5, placeholder="Type your review here...")
+        btn = gr.Button("Classify")
         label = gr.Label()
         btn.click(mnb_bt, text, label)
+        gr.Markdown("## Image Examples")
+        gr.Examples(
+            examples=[
+                "I love this movie",
+                "I hate this movie",
+            ],
+            inputs=text,
+            outputs=label,
+            fn=mnb_bt,
+            cache_examples=True,
+        )
 
     with gr.Tab("Logistic Regression"):
-        text = gr.Textbox(lines=5, placeholder="Review here...")
-        btn = gr.Button("Predict")
+        text = gr.Textbox(lines=5, placeholder="Type your review here...")
+        btn = gr.Button("Classify")
         label = gr.Label()
         btn.click(lr_bt, text, label)
+        gr.Markdown("## Image Examples")
+        gr.Examples(
+            examples=[
+                "I love this movie",
+                "I hate this movie",
+            ],
+            inputs=text,
+            outputs=label,
+            fn=lr_bt,
+            cache_examples=True,
+        )
+
 demo.launch()
