@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 
 stop_words = set(stopwords.words("english"))
 # import dataset
-df = pd.read_csv("D:/Coding/jptNB/HocMayThongKe/DoAn/archive/IMDB_preprocessing.csv")
+df = pd.read_csv("/archive/IMDB_preprocessing.csv")
 # Factorize
 X = df["review"]
 Y = df["sentiment"]
