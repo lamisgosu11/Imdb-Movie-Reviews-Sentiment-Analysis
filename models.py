@@ -17,15 +17,13 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import warnings
 from sklearn.model_selection import GridSearchCV
-
-# import preprocessing
+from sklearn.ensemble import VotingClassifier
+import pickle
 from preprocessing import data_preprocessing
 
 warnings.filterwarnings("ignore")
-
-stop_words = set(stopwords.words("english"))
 # import dataset
-df = pd.read_csv("/archive/IMDB_preprocessing.csv")
+df = pd.read_csv("archive/IMDB_preprocessing.csv")
 # Factorize
 X = df["review"]
 Y = df["sentiment"]
@@ -34,172 +32,37 @@ X = vect.fit_transform(df["review"])
 x_train, x_test, y_train, y_test = train_test_split(
     X, Y, test_size=0.3, random_state=42
 )
-# fine tuning
-svc = LinearSVC(C=1, loss="hinge")
+# models with finest parameters
+# Linear SVC
+svc = LinearSVC(C=0.1, random_state=42)
 svc.fit(x_train, y_train)
 
-
-# same thing above for mutlinomialNB
-mnb = MultinomialNB()
+# Multinomial Naive Bayes
+mnb = MultinomialNB(alpha=1)
 mnb.fit(x_train, y_train)
 
-# same thing above for logistic regression
-lr = LogisticRegression()
-lr.fit(x_train, y_train)
+# Logistic Regression
+logreg = LogisticRegression(C=10)
+logreg.fit(x_train, y_train)
 
-# fine tuning for mnb
+# ENSEMBLE MODELS
 
-# ui with gradio
-import gradio as gr
+# Voting Classifier
+voting_clf = VotingClassifier(
+    estimators=[
+        ("Logistic Regression", logreg),
+        ("Multinomial Naive Bayes", mnb),
+        ("Linear SVC", svc),
+    ],
+    voting="hard",
+)
+voting_clf.fit(x_train, y_train)
 
-
-# def predict_review(text):
-#     text = data_preprocessing(text)
-#     text = vect.transform([text])
-#     prediction = svc.predict(text)
-#     if prediction == 1:
-#         return "Positive"
-#     else:
-#         return "Negative"
-
-
-# def svm_demo(text):
-#     text = data_preprocessing(text)
-#     text = vect.transform([text])
-#     prediction = svc.predict(text)
-#     if prediction == 1:
-#         return "Positive"
-#     else:
-#         return "Negative"
-
-
-# def mnb_demo(text):
-#     text = data_preprocessing(text)
-#     text = vect.transform([text])
-#     prediction = mnb.predict(text)
-#     if prediction == 1:
-#         return "Positive"
-#     else:
-#         return "Negative"
-
-
-# def lr_demo(text):
-#     text = data_preprocessing(text)
-#     text = vect.transform([text])
-#     prediction = lr.predict(text)
-#     if prediction == 1:
-#         return "Positive"
-#     else:
-#         return "Negative"
-
-
-# svm_demo_if = gr.Interface(
-#     fn=svm_demo,
-#     inputs=gr.inputs.Textbox(lines=5, placeholder="Review here..."),
-#     outputs="text",
-#     title="Sentiment Analysis",
-#     description="Predict if a review is positive or negative",
-#     theme="huggingface",
-# )
-# mnb_demo_if = gr.Interface(
-#     fn=mnb_demo,
-#     inputs=gr.inputs.Textbox(lines=5, placeholder="Review here..."),
-#     outputs="text",
-#     title="Sentiment Analysis",
-#     description="Predict if a review is positive or negative",
-#     theme="huggingface",
-# )
-# lr_demo_if = gr.Interface(
-#     fn=lr_demo,
-#     inputs=gr.inputs.Textbox(lines=5, placeholder="Review here..."),
-#     outputs="text",
-#     title="Sentiment Analysis",
-#     description="Predict if a review is positive or negative",
-#     theme="huggingface",
-# )
-
-
-def svc_bt(text):
-    text = data_preprocessing(text)
-    text = vect.transform([text])
-    prediction = svc.predict(text)
-    if prediction == 1:
-        return "Positive"
-    else:
-        return "Negative"
-
-
-def mnb_bt(text):
-    text = data_preprocessing(text)
-    text = vect.transform([text])
-    prediction = mnb.predict(text)
-    if prediction == 1:
-        return "Positive"
-    else:
-        return "Negative"
-
-
-def lr_bt(text):
-    text = data_preprocessing(text)
-    text = vect.transform([text])
-    prediction = lr.predict(text)
-    if prediction == 1:
-        return "Positive"
-    else:
-        return "Negative"
-
-
-# tabbed interface for multiple models
-with gr.Blocks() as demo:
-    gr.Markdown("Sentiment Analysis Demo")
-    with gr.Tab("SVC"):
-        text = gr.Textbox(lines=5, placeholder="Type your review here...")
-        btn = gr.Button("Classify")
-        label = gr.Label()
-        btn.click(svc_bt, text, label)
-        gr.Markdown("## Image Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=svc_bt,
-            cache_examples=True,
-        )
-    with gr.Tab("MultinomialNB"):
-        text = gr.Textbox(lines=5, placeholder="Type your review here...")
-        btn = gr.Button("Classify")
-        label = gr.Label()
-        btn.click(mnb_bt, text, label)
-        gr.Markdown("## Image Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=mnb_bt,
-            cache_examples=True,
-        )
-
-    with gr.Tab("Logistic Regression"):
-        text = gr.Textbox(lines=5, placeholder="Type your review here...")
-        btn = gr.Button("Classify")
-        label = gr.Label()
-        btn.click(lr_bt, text, label)
-        gr.Markdown("## Image Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=lr_bt,
-            cache_examples=True,
-        )
-
-demo.launch()
+# save model (pickle)
+pickle.dump(logreg, open("models/logreg.pkl", "wb"))
+pickle.dump(mnb, open("models/mnb.pkl", "wb"))
+pickle.dump(svc, open("models/svc.pkl", "wb"))
+pickle.dump(
+    voting_clf,
+    open("models/voting_clf.pkl", "wb"),
+)
