@@ -1,4 +1,4 @@
-# import models with pickle
+# import models_TEST with pickle
 import pickle
 import os
 import pandas as pd
@@ -13,7 +13,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import VotingClassifier
 from sklearn.model_selection import train_test_split
 
-# import models from pickle files
+# import models_TEST from pickle files
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/svc.pkl", "rb") as f:
     svc = pickle.load(f)
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/mnb.pkl", "rb") as f:
@@ -24,6 +24,10 @@ with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/voting_clf.pkl", "rb") as f
     voting_clf = pickle.load(f)
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/xgb.pkl", "rb") as f:
     xgb = pickle.load(f)
+
+# import vectorizer path = "D:/Coding/jptNB/HocMayThongKe/DoAn/models_TEST/"
+with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/vect.pkl", "rb") as f:
+    vect = pickle.load(f)
 
 
 def svc_bt(text):
@@ -74,34 +78,13 @@ with gr.Blocks() as demo:
         label = gr.Label()
         btn.click(svc_bt, text, label)
         gr.Markdown("## Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-                "I don't know what to say about this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=svc_bt,
-            cache_examples=True,
-        )
+
     with gr.Tab("Multinomial Naive Bayes"):
         text = gr.Textbox(lines=5, placeholder="Type your review here...")
         btn = gr.Button("Classify")
         label = gr.Label()
         btn.click(mnb_bt, text, label)
         gr.Markdown("## Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-                "I don't know what to say about this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=mnb_bt,
-            cache_examples=True,
-        )
 
     with gr.Tab("Logistic Regression"):
         text = gr.Textbox(lines=5, placeholder="Type your review here...")
@@ -109,34 +92,13 @@ with gr.Blocks() as demo:
         label = gr.Label()
         btn.click(lr_bt, text, label)
         gr.Markdown("## Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-                "I don't know what to say about this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=lr_bt,
-            cache_examples=True,
-        )
+
     with gr.Tab("Voting Classifier"):
         text = gr.Textbox(lines=5, placeholder="Type your review here...")
         btn = gr.Button("Classify")
         label = gr.Label()
         btn.click(voting_clf_bt, text, label)
-        gr.Markdown("## Image Examples")
-        gr.Examples(
-            examples=[
-                "I love this movie",
-                "I hate this movie",
-                "I don't know what to say about this movie",
-            ],
-            inputs=text,
-            outputs=label,
-            fn=voting_clf_bt,
-            cache_examples=True,
-        )
+        gr.Markdown("## Examples")
 
 
 demo.launch()
