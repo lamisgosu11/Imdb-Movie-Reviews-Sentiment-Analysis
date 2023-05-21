@@ -1,10 +1,13 @@
 import streamlit as st
+from PIL import Image
 
 st.set_page_config(
-    page_title="Streamlit App",
+    page_title="Home",
     page_icon="🏠",
+    layout="wide",
 )
-
+imdb = Image.open("D:/Coding/jptnb/hocmaythongke/doan/Web_page/images/imdb.png")
+st.image(imdb, width=100)
 st.write("# IMDB Movie Reviews Sentiment Analysis 🎬")
 
 st.sidebar.success("Select a Demo to start.")
