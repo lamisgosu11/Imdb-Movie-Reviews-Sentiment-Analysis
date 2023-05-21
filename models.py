@@ -45,6 +45,10 @@ mnb.fit(x_train, y_train)
 logreg = LogisticRegression(C=10)
 logreg.fit(x_train, y_train)
 
+from sklearn.calibration import CalibratedClassifierCV
+
+calibrated_svc = CalibratedClassifierCV(svc)
+calibrated_svc.fit(x_train, y_train)
 # ENSEMBLE MODELS
 
 # Voting Classifier
@@ -58,11 +62,21 @@ voting_clf = VotingClassifier(
 )
 voting_clf.fit(x_train, y_train)
 
+voting_clf_soft = VotingClassifier(
+    estimators=[
+        ("Logistic Regression", logreg),
+        ("Multinomial Naive Bayes", mnb),
+        ("Linear SVC", calibrated_svc),
+    ],
+    voting="soft",
+)
+voting_clf_soft.fit(x_train, y_train)
 # save model (pickle)
+# vectorizer
+pickle.dump(vect, open("models/vectorizer.pkl", "wb"))
 pickle.dump(logreg, open("models/logreg.pkl", "wb"))
 pickle.dump(mnb, open("models/mnb.pkl", "wb"))
 pickle.dump(svc, open("models/svc.pkl", "wb"))
-pickle.dump(
-    voting_clf,
-    open("models/voting_clf.pkl", "wb"),
-)
+pickle.dump(voting_clf, open("models/voting_clf.pkl", "wb"))
+pickle.dump(voting_clf_soft, open("models/voting_clf_soft.pkl", "wb"))
+pickle.dump(calibrated_svc, open("models/calibrated_svc.pkl", "wb"))

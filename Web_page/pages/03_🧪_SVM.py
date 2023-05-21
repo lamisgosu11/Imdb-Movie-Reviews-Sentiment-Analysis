@@ -5,7 +5,11 @@ from preprocessing import data_preprocessing
 import pickle
 import streamlit as st
 
-st.set_page_config(page_title="Support Vector Machine", page_icon="🧪")
+st.set_page_config(
+    page_title="Support Vector Machine",
+    page_icon="🧪",
+    layout="wide",
+)
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/vect.pkl", "rb") as f:
     vect = pickle.load(f)
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/svc.pkl", "rb") as f:

@@ -21,7 +21,7 @@ warnings.filterwarnings("ignore")
 
 stop_words = set(stopwords.words("english"))
 
-df = pd.read_csv("/archive/IMDB Dataset.csv")
+df = pd.read_csv("D:/coding/jptnb/hocmaythongke/doan/archive/IMDB Dataset.csv")
 
 
 def no_of_words(text):
@@ -61,4 +61,6 @@ df.review = df["review"].apply(lambda x: stemming(x))
 df["word_count"] = df["review"].apply(no_of_words)
 
 # export to csv
-df.to_csv("/archive/IMDB_preprocessing.csv", index=False)
+df.to_csv(
+    "D:/coding/jptnb/hocmaythongke/doan/archive/IMDB_preprocessing.csv", index=False
+)

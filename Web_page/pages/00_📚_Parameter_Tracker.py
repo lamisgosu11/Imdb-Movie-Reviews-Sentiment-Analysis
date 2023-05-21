@@ -1,7 +1,11 @@
 import pickle
 import streamlit as st
 
-st.set_page_config(page_title="Parameter Tracker", page_icon="📚")
+st.set_page_config(
+    page_title="Parameter Tracker",
+    page_icon="📚",
+    layout="wide",
+)
 if "text" not in st.session_state:
     st.session_state.text = "Default"
 if "clean_text" not in st.session_state:
