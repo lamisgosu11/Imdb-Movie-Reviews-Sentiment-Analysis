@@ -7,7 +7,11 @@ sys.path.append("D:\Coding\jptNB\HocMayThongKe\DoAn")
 from preprocessing import data_preprocessing
 
 
-st.set_page_config(page_title="Text Cleaner", page_icon="🧽")
+st.set_page_config(
+    page_title="Text Cleaner",
+    page_icon="🧽",
+    layout="wide",
+)
 text = st.session_state.text
 
 with open("D:/Coding/jptNB/HocMayThongKe/DoAn/models/vect.pkl", "rb") as f:
