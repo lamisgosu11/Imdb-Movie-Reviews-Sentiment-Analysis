@@ -3,5 +3,5 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Marsen"
 title: "IMDB-Movie-Reviews-Sentiment-Analysis"
-version: 2.0.4
+version: 1.0.0
 url: "https://github.com/lamisgosu11/Imdb-Movie-Reviews-Sentiment-Analysis"
