@@ -46,3 +46,7 @@ $ Example: I don't love this movie would be classified as positive since "Love" 
 
 * Project folder on server:
 * Credit for the dataset: Kaggle user: LAKSHMIPATHI N (https://shorturl.at/aiqxS)
+
+## References
+
+* Maas AL, Daly RE, Pham PT, Huang D, Ng AY, Potts C (2011) Learning Word Vectors for Sentiment Analysis. In: Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies. Association for Computational Linguistics, Portland, Oregon, USA, pp 142–150
