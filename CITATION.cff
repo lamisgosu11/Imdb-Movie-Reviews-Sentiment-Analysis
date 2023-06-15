@@ -1,9 +1,11 @@
-@software{Lisa_My_Research_Software_2017,
-  author = {Lisa, Mona and Bot, Hew},
-  doi = {10.5281/zenodo.1234},
-  month = {12},
-  title = {{My Research Software}},
-  url = {https://github.com/github-linguist/linguist},
-  version = {2.0.4},
-  year = {2017}
-}
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Lisa"
+  given-names: "Mona"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "My Research Software"
+version: 2.0.4
+doi: 10.5281/zenodo.1234
+date-released: 2017-12-18
+url: "https://github.com/lamisgosu11/Imdb-Movie-Reviews-Sentiment-Analysis"
