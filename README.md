@@ -1,6 +1,6 @@
 # IMDB-Movie-Reviews-Sentiment-Analysis with web UI for demo
 
-This is my school project for my Machine Learning class at the University of Information Technology (DS103.N21).
+This is my school project for my Machine Learning class at the University of Information Technology DS102.
 
 ## Getting Started
 
