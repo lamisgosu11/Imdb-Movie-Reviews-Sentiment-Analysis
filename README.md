@@ -11,7 +11,7 @@ In this assignment, I will try a variety of approaches. I will then compare thos
 The things you need before installing the repository.
 
 * Python
-* Imported libraries (Gradio for UI (old)
+* Imported libraries (Gradio for the old UI with low performance)
 * For the UI, use Streamlit for better performance.
 * The dataset (https://shorturl.at/aiqxS)
 
@@ -45,7 +45,6 @@ $ Example: I don't love this movie would be classified as positive since "Love" 
 ```
 ## Additional Documentation and Acknowledgments
 
-* Project folder on the server:
 * Credit for the dataset: Kaggle user: LAKSHMIPATHI N (https://shorturl.at/aiqxS)
 
 ## References
